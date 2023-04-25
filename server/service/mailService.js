@@ -2,6 +2,7 @@ import nodemailer from "nodemailer";
 
 class MailService {
     constructor() {
+        //TODO: переместить значения в .env файл
         this.transporter = nodemailer.createTransport({
             service: 'gmail',
             host: 'smtp.gmail.com',

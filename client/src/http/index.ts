@@ -17,7 +17,6 @@ api.interceptors.response.use((config) => {
     return config;
 }, async (err) => {
     const originalRequest = err.config;
-    console.log(originalRequest)
     if (err.response.status === 401 && err.config && !err.config._isRetry) {
         originalRequest._isRetry = false;
         try {

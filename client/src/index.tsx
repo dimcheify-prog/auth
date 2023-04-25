@@ -1,15 +1,23 @@
 import React, {createContext} from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import Store from "./store/store";
+import Auth from "./store/auth";
+import {injectStores} from "@mobx-devtools/tools";
+import {BrowserRouter as Router} from "react-router-dom";
+import AppStore from "./store/store";
+import {GlobalStyles} from "./GlobalStyles/GlobalStyles.styled";
 
 interface IStore {
-    store: Store;
+    store: AppStore;
 }
 
-const store = new Store();
+const store = new AppStore();
 
-export const Context = createContext<IStore>({
+injectStores({
+    store,
+})
+
+export const AppContext = createContext<IStore>({
     store,
 });
 
@@ -17,8 +25,11 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-    <Context.Provider value={{store}}>
-        <App />
-    </Context.Provider>
+    <AppContext.Provider value={{store}}>
+        <Router>
+            <GlobalStyles/>
+            <App />
+        </Router>
+    </AppContext.Provider>
 );
 
