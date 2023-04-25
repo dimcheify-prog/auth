@@ -2,7 +2,6 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
-import mongoose from "mongoose";
 import {router} from "./router/index.js";
 import {errorMiddleware} from "./middleware/errorMiddleware.js";
 import {authMiddleware} from "./middleware/authMiddleware.js";
@@ -24,18 +23,17 @@ app.use(authMiddleware);
 app.use(errorMiddleware);
 
 export const pool = mysql2.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'auth_db'
+    host: process.env.HOST,
+    user: process.env.USER,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE
 }).promise();
 
 
 
-
+// TODO: добавить проверку подключения к бд
 const start = async () => {
     try {
-        // await mongoose.connect(process.env.DB_URL);
         app.listen(port, () => console.log('server is running'));
     } catch (err) {
         console.log(err);
