@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import {router} from "./router/index.js";
 import {errorMiddleware} from "./middleware/errorMiddleware.js";
 import {authMiddleware} from "./middleware/authMiddleware.js";
+import mysql2 from "mysql2";
 
 dotenv.config();
 
@@ -22,10 +23,19 @@ app.use('/api', router);
 app.use(authMiddleware);
 app.use(errorMiddleware);
 
+export const pool = mysql2.createPool({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'auth_db'
+}).promise();
+
+
+
 
 const start = async () => {
     try {
-        await mongoose.connect(process.env.DB_URL);
+        // await mongoose.connect(process.env.DB_URL);
         app.listen(port, () => console.log('server is running'));
     } catch (err) {
         console.log(err);

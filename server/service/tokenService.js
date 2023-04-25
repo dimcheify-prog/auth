@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import {TokenModel} from "../models/Token.js";
+import {Token} from "../testMYSQL/tokenMethods.js";
 
 class TokenService {
     generateToken(payload) {
@@ -30,22 +31,22 @@ class TokenService {
     };
 
     async saveToken(userId, refreshToken) {
-        const tokenData = await TokenModel.findOne({userId});
-        if (tokenData) {
-            tokenData.refreshToken = refreshToken;
-            return tokenData.save();
-        }
-        const token = await TokenModel.create({user: userId, refreshToken});
+        // const tokenData = await Token.findOne(userId);
+        // if (tokenData) {
+        //     tokenData.refreshToken = refreshToken;
+        //     return tokenData.save();
+        // }
+        const token = await Token.create(userId, refreshToken);
         return token;
     }
 
     async removeToken(refreshToken) {
-        const tokenData = await TokenModel.deleteOne({refreshToken});
+        const tokenData = await Token.deleteOne(refreshToken);
         return tokenData;
     }
 
     async findToken(refreshToken) {
-        const tokenData = await TokenModel.findOne({refreshToken});
+        const tokenData = await Token.findOne(refreshToken);
         return tokenData;
     }
 }

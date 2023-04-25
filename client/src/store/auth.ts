@@ -35,6 +35,7 @@ export default class Auth {
     async login(email: string, password: string) {
         try {
             const response = await AuthService.login(email, password);
+            this.setLoading(true);
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
             this.setUser(response.data.user);
@@ -42,11 +43,14 @@ export default class Auth {
             if (err instanceof AxiosError) {
                 this.setError(err.response!.data!.massage);
             }
+        } finally {
+            this.setLoading(false);
         }
     };
 
     async registration(email: string, password: string) {
         try {
+            this.setLoading(true);
             const response = await AuthService.registration(email, password);
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
@@ -55,6 +59,8 @@ export default class Auth {
             if (err instanceof AxiosError) {
                 this.setError(err.response!.data!.massage);
             }
+        } finally {
+            this.setLoading(false);
         }
     };
 

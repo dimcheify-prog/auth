@@ -29,6 +29,7 @@ const AuthPage: FC = () => {
 
     return (
         <AuthPageStyles>
+            <button onClick={() => store.auth.logout()}>Выход</button>
             {isLogin ? <LoginForm/> : <RegisterForm/>}
             <ButtonBox>
                 <ChoseButton onClick={() => toggle('login')}>Войти</ChoseButton>
