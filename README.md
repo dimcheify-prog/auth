@@ -15,7 +15,7 @@ Frontend:
 - [react-router-dom](https://reactrouter.com/en/main)
 - [styled-components](https://styled-components.com/docs)
 
-  Backend:
+Backend:
 - [Express](https://expressjs.com)
 - [bcrypt](https://github.com/kelektiv/node.bcrypt.js)
 - [cookie-parser](https://github.com/expressjs/cookie-parser)
