@@ -12,6 +12,3 @@ CREATE TABLE tokens (
     refreshToken VARCHAR(255) NOT NULL,
     userId INT NOT NULL UNIQUE
 );
-
-
-INSERT INTO user (email, password) VALUES ('dimcheify@mail.ru', 'qwerty');

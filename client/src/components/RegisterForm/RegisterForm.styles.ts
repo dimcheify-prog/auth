@@ -3,6 +3,10 @@ import styled from "styled-components";
 export const RegisterFormStyles = styled.form`
   display: flex;
   flex-direction: column;
-  width: 30%;
-  height: 30%;  
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  height: 40%;
+  border: 1px solid #000;
+  border-radius: 5px;
 `;

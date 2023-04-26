@@ -16,20 +16,21 @@ const AuthPage: FC = () => {
         return <div>Загрузка</div>
     }
 
-    // TODO: переписать
     const toggle = (what: string) : void => {
         if (what === 'login') {
             setIsLogin(true);
             setIsRegistration(false);
+            store.auth.setError('');
         } else if (what === 'register') {
             setIsLogin(false);
             setIsRegistration(true);
+            store.auth.setError('');
         }
     };
 
     return (
         <AuthPageStyles>
-            <button onClick={() => store.auth.logout()}>Выход</button>
+            {/*<button onClick={() => store.auth.logout()}>Выход</button>*/}
             {isLogin ? <LoginForm/> : <RegisterForm/>}
             <ButtonBox>
                 <ChoseButton onClick={() => toggle('login')}>Войти</ChoseButton>

@@ -22,16 +22,13 @@ app.use('/api', router);
 app.use(authMiddleware);
 app.use(errorMiddleware);
 
-export const pool = mysql2.createPool({
+export const pool = await mysql2.createPool({
     host: process.env.HOST,
-    user: process.env.USER,
+    user: process.env.DB_USER,
     password: process.env.PASSWORD,
     database: process.env.DATABASE
 }).promise();
 
-
-
-// TODO: добавить проверку подключения к бд
 const start = async () => {
     try {
         app.listen(port, () => console.log('server is running'));

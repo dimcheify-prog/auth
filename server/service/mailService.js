@@ -2,15 +2,14 @@ import nodemailer from "nodemailer";
 
 class MailService {
     constructor() {
-        //TODO: переместить значения в .env файл
         this.transporter = nodemailer.createTransport({
-            service: 'gmail',
-            host: 'smtp.gmail.com',
-            port: 587,
+            service: process.env.SMTP_SERVICE,
+            host: process.env.SMTP_HOST,
+            port: process.env.SMTP_PORT,
             secure: false,
             auth: {
-                user: 'vancheify@gmail.com',
-                pass: 'xoyuwvovjzsiybkc'
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASSWORD
             }
         })
     }
