@@ -1,8 +1,10 @@
 import styled from "styled-components";
 
 export const FormInput = styled.input`
-  font-size: 1.6rem;
-  padding: .25rem .5rem;
-  border: 1px solid #000;
-  border-radius: 4px;
+width: 60%;
+height: 3rem;
+font-size: 2rem;
+padding: 0 .5rem;
+border: 1px solid #12144b;
+border-radius: 5px;
 `;

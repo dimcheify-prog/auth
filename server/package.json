@@ -21,6 +21,7 @@
     "mongoose": "^7.0.3",
     "mysql2": "^3.2.3",
     "nodemailer": "^6.9.1",
+    "sequelize": "^6.31.1",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

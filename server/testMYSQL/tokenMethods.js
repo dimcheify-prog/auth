@@ -1,10 +1,20 @@
 import {pool} from "../index.js";
 
 class TokenQueries {
-    async findOne(userId) {
+    async findByUserId(userId) {
         const [rows] = await pool.query(`
-            SELECT * FROM token WHERE id=?
-        `, [id]);
+            SELECT * FROM token WHERE userId=?
+        `, [userId]);
+        if (rows.length < 1) {
+            return false;
+        }
+        return rows;
+    };
+
+    async findByRefeshToken(refreshToken) {
+        const [rows] = await pool.query(`
+            SELECT * FROM token WHERE refreshToken=?
+        `, [refreshToken]);
         if (rows.length < 1) {
             return false;
         }
@@ -22,6 +32,16 @@ class TokenQueries {
         const [result] = await pool.query(`
             DELETE FROM token WHERE refreshToken=?
         `, [refreshToken]);
+    };
+
+    async updateToken(tokenId, newRefreshToken) {
+        const [rows] = await pool.query(`
+            UPDATE token SET refreshToken=? WHERE id=?
+        `, [newRefreshToken, tokenId]);
+        if(rows.length < 1) {
+            return false;
+        }
+        return rows;
     };
 }
 

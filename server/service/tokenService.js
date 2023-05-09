@@ -31,24 +31,25 @@ class TokenService {
     };
 
     async saveToken(userId, refreshToken) {
-        // const tokenData = await Token.findOne(userId);
-        // if (tokenData) {
-        //     tokenData.refreshToken = refreshToken;
-        //     return tokenData.save();
-        // }
+        const tokenData = await Token.findByUserId(userId);
+        console.log(refreshToken)
+        if (tokenData) {
+            tokenData.refreshToken = refreshToken;
+            return Token.updateToken(tokenData.id, tokenData.refreshToken);
+        }
         const token = await Token.create(userId, refreshToken);
         return token;
-    }
+    };
 
     async removeToken(refreshToken) {
         const tokenData = await Token.deleteOne(refreshToken);
         return tokenData;
-    }
+    };
 
     async findToken(refreshToken) {
-        const tokenData = await Token.findOne(refreshToken);
+        const tokenData = await Token.findByRefeshToken(refreshToken);
         return tokenData;
-    }
+    };
 }
 
 export default new TokenService();

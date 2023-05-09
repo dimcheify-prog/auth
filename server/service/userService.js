@@ -63,6 +63,7 @@ class UserService {
         const userData = TokenService.validateRefreshToken(refreshToken);
         const tokenFromDB = await TokenService.findToken(refreshToken);
         if(!userData || !tokenFromDB) {
+            // не проходит проверку полсле двух перезагрузок
             throw ApiError.UnauthorizedError();
         }
         const user = await User.findById(userData.id);
